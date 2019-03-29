@@ -1,4 +1,4 @@
-#Staff Management System
+Staff Management System <br/>
 An employee management system uses a series of methods to gather and manage information about the employees of a business. In this idea, we target to develop a system to collect and manage the employee information of a small business. Minimally, the system shall include basic features including: 
 1) create a new employee with employee ID, name, age, role, and salary; 
 2) search for and delete an employee via their ID, name, age or role;
