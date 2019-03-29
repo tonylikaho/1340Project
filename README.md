@@ -7,6 +7,7 @@ An employee management system uses a series of methods to gather and manage info
 5) search for all employees with a salary higher than or lower than a user input; 
 6) allow adding user-defined attributes, the value of a new attribute of the existing employee should be empty or undefined.
 7) allow sorting the database according to specific attributes
+
 A menu we be displaced to help the users realize function. 
  
  
