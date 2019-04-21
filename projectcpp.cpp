@@ -12,16 +12,15 @@ struct Info{
   string name, role;
 }
 
-
 ifstream input ("data.txt");
 ofstream output ("data.txt");
 
-void GetData(){
+void GetData(staff){
   string str, line;
   int i=0;
   while (getline(input,line)){
     istringstream temp(line);
-    temp>>Staffs
+    temp>>staff.ID>>staff.name>>staff.age>>staff.role>>staff.salary;
 
   
 int Main(){
@@ -29,7 +28,7 @@ int Main(){
   cou>>num_of_staff>>num_of_datatypes;
       
   Info * staff = new Info [num_of_staff];
-  GetData(
+  GetData(staff)
   
   return 0;
 }
