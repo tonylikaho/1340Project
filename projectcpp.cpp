@@ -7,28 +7,27 @@
 #include<sstream>
 using namespace std;
 
-struct Info{
-  int ID, age, salary;
-  string name, role;
-}
-
 ifstream input ("data.txt");
 ofstream output ("data.txt");
 
-void GetData(staff){
+void GetData(ID,age,salary,name,role){
   string str, line;
   int i=0;
   while (getline(input,line)){
     istringstream temp(line);
-    temp>>staff.ID>>staff.name>>staff.age>>staff.role>>staff.salary;
+    temp>>ID[i]>>name[i]>>age[i]>>role[i]>>salary[i];
+    i+=1;
+  }
 
   
 int Main(){
-  int num_of_staff=0, num_of_datatypes=5;
-  cou>>num_of_staff>>num_of_datatypes;
-      
-  Info * staff = new Info [num_of_staff];
-  GetData(staff)
+  int num_of_staff=32767, num_of_datatypes=5;    
+  int * ID = new int [num_of_staff];
+  int * age = new int [num_of_staff];
+  double * salary = new double [num_of_staff];
+  string * name = new string [num_of_staff];
+  string * role = new string [num_of_staff];
+  GetData(ID,age,salary,name,role);
   
   return 0;
 }
