@@ -63,13 +63,13 @@ void DisplayManu(){
   cout<<"** Welcome to Staff Management System **"<<endl;
   cout<<"****************************************"<<endl;
   cout<<"1. Load existing data"<<endl;
-  cout<<"create a new employee with employee ID, name, age, role, and salary;"<<endl;
-  cout<<"search for and delete an employee via their ID, name, age or role;"<<endl;
-  cout<<"fire an employee;"<<endl;
-  cout<<"edit the details of an existing employee;"<<endl;
-  cout<<"search for all employees with a salary higher than or lower than a user input;"<<endl;
-  cout<<"allow adding user-defined attributes, the value of a new attribute of the existing employee should be empty or undefined;"<<endl;
-  cout<<"allow sorting the database according to specific attributes;"<<endl;
+  cout<<"2. Add a new employee with employee"<<endl;
+  cout<<"3. Search for an employee"<<endl;
+  cout<<"4. Fire an employee"<<endl;
+  cout<<"Edit the information of an employee"<<endl;
+  cout<<"Filter all employees with a salary"<<endl;
+  cout<<"Add attribute to employees"<<endl;
+  cout<<"Sorting the database"<<endl;
 
   
 int Main(){
