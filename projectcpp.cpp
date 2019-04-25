@@ -63,7 +63,7 @@ void DisplayManu(){
   cout<<"** Welcome to Staff Management System **"<<endl;
   cout<<"****************************************"<<endl;
   cout<<"1. Load existing data"<<endl;
-  cout<<"2. Add a new employee with employee"<<endl;
+  cout<<"2. Add new employees"<<endl;
   cout<<"3. Search for an employee"<<endl;
   cout<<"4. Fire an employee"<<endl;
   cout<<"Edit the information of an employee"<<endl;
