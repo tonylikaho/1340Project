@@ -98,8 +98,50 @@ void EnterStaff(){
     //if have more...
     
   }
-}
-      
+}      
+int SearchFor(){
+  int i,j,k;
+  string type1,str2;
+  cout<<"Search by which attribute? ID, name, age or role. ";
+  cin>>type1;
+  switch(str){
+    case (ID):
+      cout<<"Please enter his/her ID: ";
+      cin>>k;
+      for (i=0;i<num_of_staff;i++){
+        if (k==ID[i]){
+          ShowDetail(i);
+        }
+      }
+      break;
+    case (name):
+      cout<<"Please enter his/her name: ";
+      cin>>str2;
+      for (i=0;i<num_of_staff;i++){
+        if (str2==name[i]){
+          ShowDetail(i);
+        }
+      }
+      break;
+    case (age):
+      cout<<"Please enter his/her age: ";
+      cin>>k;
+      for (i=0;i<num_of_staff;i++){
+        if (k==age[i]){
+          ShowDetail(i);
+        }
+      }
+      break;
+    case (role):
+      cout<<"Please enter his/her role: ";
+      cin>>str2;
+      for (i=0;i<num_of_staff;i++){
+        if (str2==role[i]){
+          ShowDetail(i);
+        }
+      }
+      break;
+        
     
     
     
@@ -119,6 +161,8 @@ int Main(){
         EnterStaff();
         break;
       case 3:
+        SearchFor();
+        break;
         
         
         
