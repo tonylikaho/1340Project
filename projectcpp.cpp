@@ -27,7 +27,6 @@ void GetData(){
     temp>>ID[i]>>name[i]>>age[i]>>role[i]>>salary[i];
     i+=1;
   }
-  num_of_staff=i;
 }
 void AddStaff(int n){
   int total=num_of_staff+n;
@@ -57,6 +56,7 @@ void AddStaff(int n){
   name=temp4;
   role=temp5;
   tbc=temp6;
+  num_of_staff+=n;
 }
 void DisplayManu(){
   cout<<"****************************************"<<endl;
@@ -70,14 +70,58 @@ void DisplayManu(){
   cout<<"Filter all employees with a salary"<<endl;
   cout<<"Add attribute to employees"<<endl;
   cout<<"Sorting the database"<<endl;
-
+}
+int GetComand(){
+  int y=-1;
+  cout<<"Please enter your choice: ";
+  cin>>y;
+  return y;
+}
+void EnterStaff(){
+  int y=0,i,j,k;
+  cout<<"Please enter the number of new employee: ";
+  cin>>y;
+  AddStaff(y);
+  for (i=(num_of_staff-y+1);i<=num_of_staff;i++){
+    cout<<"Please enter the detail of new Staff "<<i<<endl;
+    cout<<"ID: ";
+    cin>>ID[i];
+    cout<<"name: ";
+    cin>>name[i];
+    cout<<"age :";
+    cin>>age[i];
+    cout<<"role: ";
+    cin>>role[i];
+    cout<<"salary: ";
+    cin>>salary[i];
+    
+    //if have more...
+    
+  }
+}
+      
+    
+    
+    
+    
+  
+  
   
 int Main(){
   DisplayManu();
   int x=30;
+  string y;
   GetData(ID,age,salary,name,role);
   while (x != 0){
     x=GetComand();
+    switch(x){
+      case 2:
+        EnterStaff();
+        break;
+      case 3:
+        
+        
+        
   
   return 0;
 }
