@@ -1,171 +1,274 @@
-#include <iostream>
+#include <vector>
 #include <fstream>
-#include <iomanip>
-#include <cstdlib>
+#include <iostream>
 #include <string>
-#include<sstream>
+#include <cstdlib>
+#include <cstdio>
+#include <ctime>
 using namespace std;
+struct employee{
+  string id, name, lastName, address, role, wage;
+};
+struct dataBase{
+  vector < employee > v;
+} db;
+void createEmpDoc (int, string, string, string, string);
+void createNewEmployee ();
+void deleteEmployee ();
+void getIdOfEmployee ();
+void printEmployees ();
+void editAnEmployee ();
+int main (){
+  cout << "---Terminal---\n\n";
+  string choice;
 
-ifstream input ("data.txt");
-ofstream output ("data.txt");
-int num_of_staff=32767, num_of_datatypes=5;  
-int * ID = new int [num_of_staff];
-int * age = new int [num_of_staff];
-double * salary = new double [num_of_staff];
-string * name = new string [num_of_staff];
-string * role = new string [num_of_staff];
-string * tbc = new string [num_of_staff];
+  while (choice != "7")                                         //meun
+    {
+      cout <<
+	"1. Add a new employee\n2. Get ID of an employee\n3. List all the employees\n4. Delete an employee\n5. Edit an employee\n6. Print all employees to text documents\n7. Exit\n";
+      cout << endl << ">";
+      cin >> choice;
+      getchar ();
+      if (choice == "1")
+	{
+	  srand (time (NULL));
+	  createNewEmployee ();
+	}
+      else if (choice == "2")
+	{
+	  getIdOfEmployee ();
+	}
+      else if (choice == "3")
+	{
+	  printEmployees ();
+	}
+      else if (choice == "4")
+	{
+	  deleteEmployee ();
+	}
+      else if (choice == "5")
+	{
+	  editAnEmployee ();
+	}
+      else if (choice == "6")
+	{
+	  if (db.v.size () <= 0)
+	    {
+	      printf ("\nDB is null\n\n");
+	    }
+	  else
+	    {
+	      int x = 0;
+	      for (int i = 0; i < db.v.size (); i++)
+		{
+		  auto a = stoi (db.v[i].id);
+		  createEmpDoc (a, db.v[i].role, db.v[i].wage, db.v[i].name,
+				db.v[i].lastName);
+		  x++;
+		}
+	      printf ("\nSuccessfully created %i documents!\n\n", x);
+	    }
+	}
+      else if (choice == "7")
+	{
+	  return EXIT_SUCCESS;
+	}
+      else
+	cout << "\nThat is not an option!\nplease choose 1-7\n";
 
-void GetData(){
-  string str, line;
-  int i=0;
-  while (getline(input,line)){
-    if (i>=num_of_staff){
-      AddStaff(1);
     }
-    istringstream temp(line);
-    temp>>ID[i]>>name[i]>>age[i]>>role[i]>>salary[i];
-    i+=1;
-  }
-}
-void AddStaff(int n){
-  int total=num_of_staff+n;
-  int * temp1 = new int [total];
-  int * temp2 = new int [total];
-  double * temp3 = new double [total];
-  string * temp4 = new string [total];
-  string * temp5 = new string [total];
-  string * temp6 = new string [total];
-  for (i=0;i<num_of_staff;i++){
-    temp1[i]=ID[i];
-    temp2[i]=age[i];
-    temp3[i]=salary[i];
-    temp4[i]=name[i];
-    temp5[i]=role[i];
-    temp6[i]=tbc[i];
-  }
-  delete [] ID;
-  delete [] age;
-  delete [] salary;
-  delete [] name;
-  delete [] role;
-  delete [] tbc;
-  ID=temp1;
-  age=temp2;
-  salary=temp3;
-  name=temp4;
-  role=temp5;
-  tbc=temp6;
-  num_of_staff+=n;
-}
-void DisplayManu(){
-  cout<<"****************************************"<<endl;
-  cout<<"** Welcome to Staff Management System **"<<endl;
-  cout<<"****************************************"<<endl;
-  cout<<"1. Load existing data"<<endl;
-  cout<<"2. Add new employees"<<endl;
-  cout<<"3. Search for an employee"<<endl;
-  cout<<"4. Fire an employee"<<endl;
-  cout<<"Edit the information of an employee"<<endl;
-  cout<<"Filter all employees with a salary"<<endl;
-  cout<<"Add attribute to employees"<<endl;
-  cout<<"Sorting the database"<<endl;
-}
-int GetComand(){
-  int y=-1;
-  cout<<"Please enter your choice: ";
-  cin>>y;
-  return y;
-}
-void EnterStaff(){
-  int y=0,i,j,k;
-  cout<<"Please enter the number of new employee: ";
-  cin>>y;
-  AddStaff(y);
-  for (i=(num_of_staff-y+1);i<=num_of_staff;i++){
-    cout<<"Please enter the detail of new Staff "<<i<<endl;
-    cout<<"ID: ";
-    cin>>ID[i];
-    cout<<"name: ";
-    cin>>name[i];
-    cout<<"age :";
-    cin>>age[i];
-    cout<<"role: ";
-    cin>>role[i];
-    cout<<"salary: ";
-    cin>>salary[i];
-    
-    //if have more...
-    
-  }
-}      
-int SearchFor(){
-  int i,j,k;
-  string type1,str2;
-  cout<<"Search by which attribute? ID, name, age or role. ";
-  cin>>type1;
-  switch(str){
-    case (ID):
-      cout<<"Please enter his/her ID: ";
-      cin>>k;
-      for (i=0;i<num_of_staff;i++){
-        if (k==ID[i]){
-          ShowDetail(i);
-        }
-      }
-      break;
-    case (name):
-      cout<<"Please enter his/her name: ";
-      cin>>str2;
-      for (i=0;i<num_of_staff;i++){
-        if (str2==name[i]){
-          ShowDetail(i);
-        }
-      }
-      break;
-    case (age):
-      cout<<"Please enter his/her age: ";
-      cin>>k;
-      for (i=0;i<num_of_staff;i++){
-        if (k==age[i]){
-          ShowDetail(i);
-        }
-      }
-      break;
-    case (role):
-      cout<<"Please enter his/her role: ";
-      cin>>str2;
-      for (i=0;i<num_of_staff;i++){
-        if (str2==role[i]){
-          ShowDetail(i);
-        }
-      }
-      break;
-        
-    
-    
-    
-    
-  
-  
-  
-int Main(){
-  DisplayManu();
-  int x=30;
-  string y;
-  GetData(ID,age,salary,name,role);
-  while (x != 0){
-    x=GetComand();
-    switch(x){
-      case 2:
-        EnterStaff();
-        break;
-      case 3:
-        SearchFor();
-        break;
-        
-        
-        
-  
+
+
+
   return 0;
+}
+void createEmpDoc (int id, string role, string wage, string firstname,string lastname){
+  auto s = to_string (id) + ".txt";
+  ofstream file (s);
+
+  if (file.is_open ())
+    {
+      file << firstname << endl << lastname << endl << role << endl << wage <<
+	endl << id << endl;
+      cout <<
+	"\nSucessfully created a new file with the employees information.\n\n";
+      return;
+    }
+}
+void createNewEmployee (){
+  srand (time (NULL));
+  struct employee *emp = new employee;
+  int x;
+
+  //enter the employees information
+  cout << "--New employee---" << endl << endl << "Enter the firstname: >";
+  getline (cin, emp->name);
+  cout << endl;
+  cout << "Enter the lastname: >";
+  getline (cin, emp->lastName);
+  cout << endl;
+  cout << "Enter the role: >";
+  getline (cin, emp->role);
+  cout << endl;
+  cout << "Enter the address: >";
+  getline (cin, emp->address);
+  cout << endl;
+  cout << "Enter the wage: >";
+  getline (cin, emp->wage);
+  cout << endl;
+  cout << "Assigning ID to the new employee...\n\n";
+  x = (1 + rand () % 99999);
+  auto s = to_string (x);	//convert id to string
+  emp->id = s;
+
+  for (int i = 0; i < db.v.size (); i++)
+    {
+      if (db.v.size () <= 0)
+	{
+	  break;
+	}
+      //if we by any unlucky chanse we would get a duplication in Id's
+      if (emp->id == db.v[i].id)
+	{
+	  printf ("This ID already exist, assigning new id...\n");
+	redo:
+	  emp->id = (1 + rand () % 99999);
+	  if (emp->id == db.v[i].id)
+	    goto redo;
+	}
+    }
+
+  //save the new employee in the database
+  db.v.push_back (*emp);
+
+  delete emp;
+  emp = nullptr;
+}
+void deleteEmployee (){
+  string FN, LN, IDD, b;
+  bool a = 0;
+
+  cout<<"\n\nEnter the employees firstname that you'd like to delete: >";
+  cin >> FN;
+  cout << "\n\nEnter the employees lastname that you'd like to delete: >";
+  cin >> LN;
+  cout << "\n\nEnter the employees ID that you'd like to delete: >";
+  cin >> IDD;
+  for (int i = 0; i < db.v.size (); i++)
+    {
+      if (IDD == db.v[i].id && LN == db.v[i].lastName && FN == db.v[i].name)
+	{
+	  cout << "Are you sure you want to delete" << db.v[i].name.
+	    c_str () << db.v[i].lastName.
+	    c_str () << "?\n(plese input Y for yes or N for No)";
+	  cin >> b;
+	  if (b == "Y")
+	    {
+	      printf ("Employee %s has been deleted\n", db.v[i].id.c_str ());
+	      db.v.erase (db.v.begin () + i);
+	      a = 1;
+	    }
+	}
+    }
+  if (a == 0 && b != "N")
+    cout << "Employee not found" << endl;
+}
+void getIdOfEmployee () {
+  string name;
+  cout << "\nEnter the firstnamename you'd like to find the ID for: >";
+  cin >> name;
+
+  for (int i = 0; i < db.v.size (); i++)
+    {
+      if (name != db.v[i].name)
+	continue;
+      else
+	printf ("\nName: %s\nID: %s\n\n", db.v[i].name.c_str (),
+		db.v[i].id.c_str ());
+    }
+}
+void printEmployees (){
+  if (db.v.size () < 0 || db.v.size () == 0)
+    {
+      cout << "The database is NULL" << endl << endl << endl;
+    }
+  if (db.v.size () > 0)
+    {
+      for (int i = 0; i < db.v.size (); i++)
+	{
+	  printf
+	    ("\nEmploye %i\n{\n\tFirstname: \t%s\n\tLastname: %s\n\tRole: \t%s\n\tAddress: \t%s\n\tWage: \t%s\n\tId: \t%s\n}\n\n",
+	     i + 1, db.v[i].name.c_str (), db.v[i].lastName.c_str (),
+	     db.v[i].role.c_str (), db.v[i].address.c_str (),
+	     db.v[i].wage.c_str (), db.v[i].id.c_str ());
+	}
+    }
+}
+void editAnEmployee (){
+  string FN, LN, IDD;
+  int check=0;
+  string wage, id, newName, lastName, newAddress, newRole;
+  char d;
+  bool running = true;
+  if (db.v.size () < 0||db.v.size () == 0){
+      cout<<"The database is NULL\n\n";
+      return;
+    }
+  cout<<"\n\nEnter the employees firstname that you'd like to delete: >";
+  cin >> FN;
+  cout << "\n\nEnter the employees lastname that you'd like to delete: >";
+  cin >> LN;
+  cout << "\n\nEnter the employees ID that you'd like to delete: >";
+  cin >> IDD;
+  while (running){
+      for (int i = 0; i < db.v.size (); i++){
+	  if (IDD == db.v[i].id && LN == db.v[i].lastName && FN == db.v[i].name)
+	    {check=1;
+	      printf ("To exit edit mode, press 6\n\n");
+	      printf("\nPress 1 to edit firstname, 2 to edit lastname, 3 for address, 4 for role and 5 for wage, 6 to go back\n>");
+          cin >> d;
+        switch (d)
+		{
+		case '1':
+		  cout << endl << "Enter the new employees new firstname: >";
+		  cin >> newName;
+		  db.v[i].name = newName;
+		  break;
+		case '2':
+		  cout << endl << "Enter the new lastname: >";
+		  cin >> lastName;
+		  db.v[i].lastName = lastName;
+		  break;
+		case '3':
+		  cout << endl << "Enter the new address: >";
+		  cin >> newAddress;
+		  db.v[i].address = newAddress;
+		  break;
+		case '4':
+		  cout << endl << "Enter the new role for the employee: >";
+		  cin >> newRole;
+		  db.v[i].role = newRole;
+		  break;
+		case '5':
+		  cout << endl << "Enter thew new wage for the employee: >";
+		  cin >> wage;
+		  db.v[i].wage = wage;
+		  break;
+		case '6':
+		  running = false;
+		  break;
+		default:
+		  cout << "Not a valid option!\nchoose again"<<endl;
+	      cin>>d;
+	       break;// flush stream
+	    }
+
+	}
+	if(check==0){
+	    cout<<"employee Not Found"<<endl;
+	    running = false;
+	}
+    }
+}
+    
 }
